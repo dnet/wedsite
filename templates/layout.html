@@ -30,7 +30,7 @@
               <li{% if home %} class="active"{% endif %}><a href="{{ url_for('home') }}">Főoldal</a></li>
               <li><a href="#">Wishlist</a></li>
               <li><a href="#">Kapcsolat</a></li>
-              <li><a href="#">Polgári szertartás</a></li>
+              <li{% if polgari %} class="active"{% endif %}><a href="{{ url_for('polgari') }}">Polgári szertartás</a></li>
               <li{% if egyhazi %} class="active"{% endif %}><a href="{{ url_for('egyhazi') }}">Egyházi szertartás</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->

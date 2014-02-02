@@ -12,6 +12,10 @@ def home():
 def egyhazi():
     return render_template('egyhazi.html', egyhazi=True)
 
+@app.route('/polgari.html')
+def polgari():
+    return render_template('polgari.html', polgari=True)
+
 @app.route('/favicon.ico')
 def favicon():
     return redirect(url_for('static', filename='img/favicon.ico'))
