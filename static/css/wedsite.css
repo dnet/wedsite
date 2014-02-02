@@ -1,5 +1,17 @@
+@font-face {
+  font-family: 'Junicode';
+  font-style: normal;
+  font-weight: bold;
+  src: url(../fonts/Junicode-BoldItalic.woff) format('woff');
+}
+
 body {
   background-color: #d09f53;
+}
+
+nav, #payload {
+  font-family: 'Junicode';
+  font-size: 120%;
 }
 
 #payload {
