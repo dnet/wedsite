@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Judit és Andris</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/wedsite.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    <script src="{{ url_for('static', filename='js/jquery-1.11.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.backstretch.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/wedsite.js') }}"></script>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#wedsite-navbar-collapse-1">
+              <span class="sr-only">Menü elrejtése/megjelenítése</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for('home') }}">Judit és Andris</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="wedsite-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="{{ url_for('home') }}">Főoldal</a></li>
+              <li><a href="#">Wishlist</a></li>
+              <li><a href="#">Kapcsolat</a></li>
+              <li><a href="#">Polgári szertartás</a></li>
+              <li><a href="#">Egyházi szertartás</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3"></div>
+		<div class="col-md-6" id="payload">{% block payload %}{% endblock %}</div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  </body>
+</html>
