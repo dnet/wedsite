@@ -8,6 +8,10 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
+@app.route('/egyhazi.html')
+def egyhazi():
+    return render_template('egyhazi.html')
+
 @app.route('/favicon.ico')
 def favicon():
     return redirect(url_for('static', filename='img/favicon.ico'))
