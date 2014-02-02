@@ -27,11 +27,11 @@
 
           <div class="collapse navbar-collapse" id="wedsite-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="{{ url_for('home') }}">Főoldal</a></li>
+              <li{% if home %} class="active"{% endif %}><a href="{{ url_for('home') }}">Főoldal</a></li>
               <li><a href="#">Wishlist</a></li>
               <li><a href="#">Kapcsolat</a></li>
               <li><a href="#">Polgári szertartás</a></li>
-              <li><a href="{{ url_for('egyhazi') }}">Egyházi szertartás</a></li>
+              <li{% if egyhazi %} class="active"{% endif %}><a href="{{ url_for('egyhazi') }}">Egyházi szertartás</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

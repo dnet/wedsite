@@ -6,11 +6,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', home=True)
 
 @app.route('/egyhazi.html')
 def egyhazi():
-    return render_template('egyhazi.html')
+    return render_template('egyhazi.html', egyhazi=True)
 
 @app.route('/favicon.ico')
 def favicon():
