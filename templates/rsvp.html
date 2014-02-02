@@ -2,29 +2,29 @@
 {% block payload %}
 <h1>RSVP</h1>
 <p>Az alábbi mezők kitöltésével segítesz nekünk abban, hogy az esküvőnk napján ne csak mi érezzük jól magunkat, hanem te is. Kérünk, írd be a nevedet, azt, hogy jelen tudsz-e lenni a szertartásokon, valamint az azt követő vacsorán. Amennyiben speciális menüre van szükséged, kérjük, azt is jelezd a megfelelő mezők kitöltésével.</p>
+{% if success %}<div class="alert alert-success">Köszönjük a visszajelzést, szeretettel várunk a nagy napon!</div>{% else %}
+{% if invalid %}<div class="alert alert-danger">A név mező kitöltése és legalább egy programpont megjelölése kötelező!</div>{% endif %}
 <form action="" method="post" role="form">
   <div class="form-group">
     <label for="names">Név <small>(ha többen érkeztek, kérjük add meg minden résztvevő nevét)</small></label>
-    <input type="text" class="form-control" id="names">
+    <input type="text" class="form-control" id="names" name="names" value="{{ fields.names }}">
   </div>
   <div class="form-group">
     Szeretné(n)k részt venni a
     <div>
+      {% for key, label in (('polgari', 'polgári szertartáson'), ('egyhazi', 'egyházi szertartáson'),
+                            ('vacsora', 'vacsorán')): %}
       <label class="checkbox-inline">
-        <input type="checkbox" value="" name="polgari"> polgári szertartáson
+        <input type="checkbox" value="1" name="{{ key }}"{% if key in fields %}checked{% endif %}> {{ label }}
       </label>
-      <label class="checkbox-inline">
-        <input type="checkbox" value="" name="egyhazi"> egyházi szertartáson
-      </label>
-      <label class="checkbox-inline">
-        <input type="checkbox" value="" name="vacsora"> vacsorán
-      </label>
+      {% endfor %}
     </div>
   </div>
   <div class="form-group">
-    <label for="names">Speciális igények <small>(vegetáriánus-, lisztérzékeny-, gyerekmenü, egyéb tudnivalók)</small></label>
-    <textarea class="form-control" id="names" rows="4"></textarea>
+    <label for="notes">Speciális igények <small>(vegetáriánus-, lisztérzékeny-, gyerekmenü, egyéb tudnivalók)</small></label>
+    <textarea class="form-control" id="notes" name="notes" rows="4">{{ fields.notes }}</textarea>
   </div>
   <button type="submit" class="btn btn-primary center-block">Küldés</button>
 </form>
+{% endif %}
 {% endblock %}

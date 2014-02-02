@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
+from contextlib import closing
+import sqlite3
 
 app = Flask(__name__)
 
@@ -16,9 +18,30 @@ def egyhazi():
 def polgari():
     return render_template('polgari.html', polgari=True)
 
+FIELDS = ('names', 'notes')
+EVENTS = ('egyhazi', 'polgari', 'vacsora')
+
 @app.route('/rsvp', methods=['GET', 'POST'])
 def rsvp():
-    return render_template('rsvp.html')
+    success = False
+    if request.method == 'POST':
+        rf = request.form
+        invalid = not rf.get('names') or not any(event in rf for event in EVENTS)
+        if not invalid:
+            success = True
+            save_rsvp()
+    else:
+        invalid = False
+    return render_template('rsvp.html', invalid=invalid, success=success, fields=request.form)
+
+# CREATE TABLE rsvp (names, egyhazi, polgari, vacsora, notes);
+def save_rsvp():
+    with closing(sqlite3.connect('rsvp.sqlite3')) as db:
+        with db:
+            keys = list(FIELDS) + list(EVENTS)
+            db.execute('INSERT INTO rsvp ({fields}) VALUES ({qmarks})'.format(
+                fields=','.join(keys), qmarks=','.join('?' * len(keys))),
+                [request.form.get(key) for key in keys])
 
 @app.route('/favicon.ico')
 def favicon():
