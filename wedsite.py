@@ -16,6 +16,10 @@ def egyhazi():
 def polgari():
     return render_template('polgari.html', polgari=True)
 
+@app.route('/rsvp', methods=['GET', 'POST'])
+def rsvp():
+    return render_template('rsvp.html')
+
 @app.route('/favicon.ico')
 def favicon():
     return redirect(url_for('static', filename='img/favicon.ico'))

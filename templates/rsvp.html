@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block payload %}
+<h1>RSVP</h1>
+<p>Az alábbi mezők kitöltésével segítesz nekünk abban, hogy az esküvőnk napján ne csak mi érezzük jól magunkat, hanem te is. Kérünk, írd be a nevedet, azt, hogy jelen tudsz-e lenni a szertartásokon, valamint az azt követő vacsorán. Amennyiben speciális menüre van szükséged, kérjük, azt is jelezd a megfelelő mezők kitöltésével.</p>
+<form action="" method="post" role="form">
+  <div class="form-group">
+    <label for="names">Név <small>(ha többen érkeztek, kérjük add meg minden résztvevő nevét)</small></label>
+    <input type="text" class="form-control" id="names">
+  </div>
+  <div class="form-group">
+    Szeretné(n)k részt venni a
+    <div>
+      <label class="checkbox-inline">
+        <input type="checkbox" value="" name="polgari"> polgári szertartáson
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" value="" name="egyhazi"> egyházi szertartáson
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" value="" name="vacsora"> vacsorán
+      </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="names">Speciális igények <small>(vegetáriánus-, lisztérzékeny-, gyerekmenü, egyéb tudnivalók)</small></label>
+    <textarea class="form-control" id="names" rows="4"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary center-block">Küldés</button>
+</form>
+{% endblock %}
