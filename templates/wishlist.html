@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block payload %}
+<h1>Nászajándék</h1>
+<p>Közös otthonunk teljessé tételéhez néhány dolog még hiányzik, ezeket találjátok a lenti nászajándék
+listában. Az ajándékok lefoglalhatóak, így biztosítva, hogy kétsze ne kapjuk ugyanazt.
+Emellett van néhány olyan dolog is, amit mi szeretnénk majd kiválasztani.</p>
+<p>Így arra kérünk, hogy ha nem találsz a nászajándék listánkon olyasmit, amivel szívesen meglepnél
+bennünket, járulj hozzá „borítékban ékező ajándékkal” a közös életünkhöz &ndash; és hozd el mellé ajándékba a
+kedvenc könyved, hogy családi könyvtárunkban legyen egy darab, amelyről mindig te jutsz majd az eszünkbe!</p>
+<form action="" method="post">
+    <table class="table table-condensed">
+        <tr class="active">
+            <th>Ajándék</th>
+            <th>Leírás</th>
+            <th>Link</th>
+            <th>Foglalt?</th>
+        </tr>
+        {% for id, label, desc, link, booked in items %}
+        <tr class="{% if booked %}danger{% else %}success{% endif %}">
+            <td>{{ label }}</td>
+            <td>{{ desc }}</td>
+            <td><a href="{{ link }}">Link</a></td>
+            <td>
+                {% if booked %}
+                <span class="label label-danger">Foglalt</span>
+                {% else %}
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="1" name="{{ id }}">&nbsp;<small>foglalás</small>
+                </label>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="input-group">
+        <span class="input-group-addon">Neved</span>
+        <input type="text" class="form-control" name="name">
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary">Foglal</button>
+        </span>
+    </div>
+</form>
+{% endblock %}

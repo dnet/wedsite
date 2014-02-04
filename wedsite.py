@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- encoding: utf-8 -*-
 
 from flask import Flask, render_template, redirect, url_for, request
 from contextlib import closing
@@ -21,6 +22,14 @@ def polgari():
 @app.route('/kapcsolat.html')
 def kapcsolat():
     return render_template('kapcsolat.html', kapcsolat=True)
+
+@app.route('/naszajandek.html')
+def wishlist():
+    items = [
+            (1, u'Léggömbhámozó', u'kék színű', 'http://leggomb.hu', True),
+            (2, u'Levegőfényesítő', '', 'http://levego.hu', False),
+            ]
+    return render_template('wishlist.html', wishlist=True, items=items)
 
 FIELDS = ('names', 'notes')
 EVENTS = ('egyhazi', 'polgari', 'vacsora')
