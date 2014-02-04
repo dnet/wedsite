@@ -18,6 +18,10 @@ def egyhazi():
 def polgari():
     return render_template('polgari.html', polgari=True)
 
+@app.route('/kapcsolat.html')
+def kapcsolat():
+    return render_template('kapcsolat.html', kapcsolat=True)
+
 FIELDS = ('names', 'notes')
 EVENTS = ('egyhazi', 'polgari', 'vacsora')
 

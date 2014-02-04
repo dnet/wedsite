@@ -31,7 +31,7 @@
               <li><a href="#">Nászajándék</a></li>
               <li{% if polgari %} class="active"{% endif %}><a href="{{ url_for('polgari') }}">Polgári szertartás</a></li>
               <li{% if egyhazi %} class="active"{% endif %}><a href="{{ url_for('egyhazi') }}">Egyházi szertartás</a></li>
-              <li><a href="#">Kapcsolat</a></li>
+              <li{% if kapcsolat %} class="active"{% endif %}><a href="{{ url_for('kapcsolat') }}">Kapcsolat</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
