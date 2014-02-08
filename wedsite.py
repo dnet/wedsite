@@ -24,7 +24,7 @@ def polgari():
 def kapcsolat():
     return render_template('kapcsolat.html', kapcsolat=True)
 
-# CREATE TABLE wishlist (id INTEGER PRIMARY KEY AUTOINCREMENT, label, desc, link, booked);
+# CREATE TABLE wishlist (id INTEGER PRIMARY KEY AUTOINCREMENT, label, desc, link, booked, changed);
 @app.route('/naszajandek.html', methods=['GET', 'POST'])
 def wishlist():
     name = request.form.get('name', '')
@@ -42,7 +42,8 @@ def wishlist():
                 else:
                     msg = u'Sikeresen lefoglaltad a kiválasztott ajándéko{0}t, köszönjük!'.format(
                             '' if len(checked) == 1 else 'ka')
-                    cur.executemany('UPDATE wishlist SET booked = ? WHERE id = ? AND booked IS NULL',
+                    cur.executemany('''UPDATE wishlist SET booked = ?, changed = CURRENT_TIMESTAMP
+                            WHERE id = ? AND booked IS NULL''',
                             ((b64encode(name.encode('utf-8')), item) for item in checked))
                     success = True
             items = cur.execute('SELECT id, label, IFNULL(desc, ""), link, booked FROM wishlist').fetchall()
