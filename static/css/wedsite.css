@@ -42,3 +42,7 @@ nav, #payload {
 .book-gift-column {
     text-align: center;
 }
+
+#payload a {
+	color: #860;
+}
