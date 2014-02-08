@@ -66,12 +66,12 @@ def rsvp():
         invalid = False
     return render_template('rsvp.html', invalid=invalid, success=success, fields=request.form)
 
-# CREATE TABLE rsvp (names, egyhazi, polgari, vacsora, notes);
+# CREATE TABLE rsvp (names, egyhazi, polgari, vacsora, notes, added);
 def save_rsvp():
     with closing(sqlite3.connect('rsvp.sqlite3')) as db:
         with db:
             keys = list(FIELDS) + list(EVENTS)
-            db.execute('INSERT INTO rsvp ({fields}) VALUES ({qmarks})'.format(
+            db.execute('INSERT INTO rsvp ({fields}, added) VALUES ({qmarks}, CURRENT_TIMESTAMP)'.format(
                 fields=','.join(keys), qmarks=','.join('?' * len(keys))),
                 [request.form.get(key) for key in keys])
 
