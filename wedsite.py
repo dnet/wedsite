@@ -3,7 +3,8 @@
 
 from flask import Flask, render_template, redirect, url_for, request
 from contextlib import closing
-import sqlite3
+from base64 import b64encode
+import sqlite3, re
 
 app = Flask(__name__)
 
@@ -23,13 +24,30 @@ def polgari():
 def kapcsolat():
     return render_template('kapcsolat.html', kapcsolat=True)
 
-@app.route('/naszajandek.html')
+# CREATE TABLE wishlist (id INTEGER PRIMARY KEY AUTOINCREMENT, label, desc, link, booked);
+@app.route('/naszajandek.html', methods=['GET', 'POST'])
 def wishlist():
-    items = [
-            (1, u'Léggömbhámozó', u'kék színű', 'http://leggomb.hu', True),
-            (2, u'Levegőfényesítő', '', 'http://levego.hu', False),
-            ]
-    return render_template('wishlist.html', wishlist=True, items=items)
+    name = request.form.get('name')
+    checked = [int(key) for key in request.form.iterkeys() if re.match(r'^\d+$', key)]
+    msg = None
+    success = False
+    with closing(sqlite3.connect('wishlist.sqlite3')) as db:
+        cur = db.cursor()
+        with db:
+            if request.method == 'POST':
+                if not name:
+                    msg = u'Kérlek add meg a nevedet!'
+                elif not checked:
+                    msg = u'Kérlek jelölj meg legalább egy ajándékot!'
+                else:
+                    msg = u'Sikeresen lefoglaltad a kiválasztott ajándéko{0}t, köszönjük!'.format(
+                            '' if len(checked) == 1 else 'ka')
+                    cur.executemany('UPDATE wishlist SET booked = ? WHERE id = ?',
+                            ((b64encode(name.encode('utf-8')), item) for item in checked))
+                    success = True
+            items = cur.execute('SELECT id, label, IFNULL(desc, ""), link, booked FROM wishlist').fetchall()
+    return render_template('wishlist.html', wishlist=True, items=items,
+            name=name, checked=checked, msg=msg, success=success)
 
 FIELDS = ('names', 'notes')
 EVENTS = ('egyhazi', 'polgari', 'vacsora')

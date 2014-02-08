@@ -7,6 +7,9 @@ Emellett van néhány olyan dolog is, amit mi szeretnénk majd kiválasztani.</p
 <p>Így arra kérünk, hogy ha nem találsz a nászajándék listánkon olyasmit, amivel szívesen meglepnél
 bennünket, járulj hozzá „borítékban ékező ajándékkal” a közös életünkhöz &ndash; és hozd el mellé ajándékba a
 kedvenc könyved, hogy családi könyvtárunkban legyen egy darab, amelyről mindig te jutsz majd az eszünkbe!</p>
+{% if msg %}
+<div class="alert alert-{% if success %}success{% else %}danger{% endif %}">{{ msg }}</div>
+{% endif %}
 <form action="" method="post">
     <table class="table table-condensed">
         <tr class="active">
@@ -19,13 +22,14 @@ kedvenc könyved, hogy családi könyvtárunkban legyen egy darab, amelyről min
         <tr class="{% if booked %}danger{% else %}success{% endif %}">
             <td>{{ label }}</td>
             <td>{{ desc }}</td>
-            <td><a href="{{ link }}">Link</a></td>
+            <td><a href="{{ link }}" rel="nofollow" target="_blank">Link</a></td>
             <td>
                 {% if booked %}
                 <span class="label label-danger">Foglalt</span>
                 {% else %}
                 <label class="checkbox-inline">
-                    <input type="checkbox" value="1" name="{{ id }}">&nbsp;<small>foglalás</small>
+                    <input type="checkbox" value="" name="{{ id }}"
+                    {% if id in checked %}checked{% endif %}>&nbsp;<small>foglalás</small>
                 </label>
                 {% endif %}
             </td>
@@ -34,7 +38,7 @@ kedvenc könyved, hogy családi könyvtárunkban legyen egy darab, amelyről min
     </table>
     <div class="input-group">
         <span class="input-group-addon">Neved</span>
-        <input type="text" class="form-control" name="name">
+        <input type="text" class="form-control" name="name" value="{{ name }}">
         <span class="input-group-btn">
             <button type="submit" class="btn btn-primary">Foglal</button>
         </span>
