@@ -36,3 +36,7 @@ nav, #payload {
 #osmap {
 	border: 1px solid #333;
 }
+
+.book-gift-column {
+    text-align: center;
+}

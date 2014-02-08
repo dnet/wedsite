@@ -23,13 +23,13 @@ kedvenc könyved, hogy családi könyvtárunkban legyen egy darab, amelyről min
             <td>{{ label }}</td>
             <td>{{ desc }}</td>
             <td><a href="{{ link }}" rel="nofollow" target="_blank">Link</a></td>
-            <td>
+            <td class="book-gift-column">
                 {% if booked %}
                 <span class="label label-danger">Foglalt</span>
                 {% else %}
                 <label class="checkbox-inline">
                     <input type="checkbox" value="" name="{{ id }}"
-                    {% if id in checked %}checked{% endif %}>&nbsp;<small>foglalás</small>
+                    {% if id in checked %}checked{% endif %}><small>foglalás</small>
                 </label>
                 {% endif %}
             </td>
