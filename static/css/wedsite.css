@@ -6,7 +6,9 @@
 }
 
 body {
-  background-color: #d09f53;
+  background-color: #0e0d0c;
+  background: url(../img/bg.jpg) no-repeat fixed;
+  background-size: cover;
 }
 
 nav, #payload {
