@@ -27,7 +27,7 @@ def kapcsolat():
 # CREATE TABLE wishlist (id INTEGER PRIMARY KEY AUTOINCREMENT, label, desc, link, booked);
 @app.route('/naszajandek.html', methods=['GET', 'POST'])
 def wishlist():
-    name = request.form.get('name')
+    name = request.form.get('name', '')
     checked = [int(key) for key in request.form.iterkeys() if re.match(r'^\d+$', key)]
     msg = None
     success = False
